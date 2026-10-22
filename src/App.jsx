@@ -1,6 +1,5 @@
 import './App.css'
 import Cards from './functions/Cards'
-import Detalhes from './functions/Detalhes'
 
 function App() {
 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 function ReadCards() {
-    const url = 'https://pokeapi.co/api/v2/pokemon?limit=151&offset=0';
+      const url = 'https://pokeapi.co/api/v2/pokemon?limit=151&offset=0';
       const [pokemonData, setPokemonData] = useState([]);
       const [loading, setLoading] = useState(true);
     
