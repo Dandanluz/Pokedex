@@ -37,7 +37,13 @@ function Cards() {
       <div>
             <ul className="filtros">
                 <li >
-                    Nome
+                    <select>
+                      <option value = "" disabled selected>Type</option>
+                      <option value = "Fogo"> Fogo</option>
+                      <option value = "Água"> Água</option>
+                      <option value = "Terra"> Terra</option>
+
+                    </select>
                 </li>
                 <li >
                     Email
