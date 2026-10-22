@@ -6,7 +6,7 @@ function App() {
 
   return (
     <>
-      <h1>PokeAPI</h1>
+      <h1>Pokedex do Dandan</h1>
       <Cards />
       
     </>
