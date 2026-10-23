@@ -9,14 +9,19 @@ function Cards() {
   const [termoBusca, setTermoBusca] = useState('');
   const [selectedPokemonId, setSelectedPokemonId] = useState(null);
 
+  const handleSelectCard = (id) => {
+    setSelectedPokemonId(id);
+    setTermoBusca('');
+  };
+
   const handleBuscar = () => {
     setTermoBusca(inputNome);
     setSelectedPokemonId(null);
   };
-
-  const handleSelectCard = (id) => {
-    setSelectedPokemonId(id);
-    setTermoBusca('');
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleBuscar();
+    }
   };
 
   if (loading) {
@@ -30,11 +35,12 @@ function Cards() {
         type="text" 
         placeholder="Nome do Pokémon" 
         value={inputNome} 
+        onKeyDown={handleKeyDown}
         onChange={(e) => setInputNome(e.target.value)}
       />
       <button id="botao-buscar" onClick={handleBuscar} >Buscar</button>
 
-      <div>
+    <div>
             <ul className="filtros">
                 <li>
                     <select defaultValue="">
