@@ -36,30 +36,32 @@ function Cards() {
 
       <div>
             <ul className="filtros">
-                <li >
-                    <select>
-                      <option value = "" disabled selected>Type</option>
-                      <option value = "Fogo"> Fogo</option>
-                      <option value = "Água"> Água</option>
-                      <option value = "Terra"> Terra</option>
-
+                <li>
+                    <select defaultValue="">
+                      <option value="" disabled>Type</option>
+                      <option value="Fogo">Fogo</option>
+                      <option value="Água">Água</option>
+                      <option value="Terra">Terra</option>
                     </select>
                 </li>
-                <li >
-                    Email
-                </li>
-                <li >
-                    Idade
-                </li>
-                <li >
-                    Salario
-                </li>
-                <li >
-                    Deletar
-                </li>
-                <li >
-                    Editar
-                </li>
+               <li>
+                    <select defaultValue="">
+                      <option value="" disabled>Altura min.</option>
+                      <option value="< 50 cm">0 cm</option>
+                      <option value="50 cm < 1m">50 cm</option>
+                      <option value="1m < 1,5m">1 m</option>
+                      <option value="1,5m <">1,5 m</option>
+                    </select>
+               </li>
+               <li>
+                    <select defaultValue="">
+                      <option value="" disabled>Altura max.</option>
+                      <option value="< 50 cm">50 cm</option>
+                      <option value="50 cm < 1m">1 m</option>
+                      <option value="1m < 1,5m">1,5 m</option>
+                      <option value="1,5m <">Infinito</option>
+                    </select>
+               </li>
             </ul>
             
       </div>
