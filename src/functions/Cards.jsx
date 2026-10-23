@@ -23,6 +23,12 @@ function Cards() {
     setTermoBusca('');
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleBuscar(); 
+    }
+  };
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -66,7 +72,8 @@ function Cards() {
         id="busca" 
         type="text" 
         placeholder="Nome do Pokémon" 
-        value={inputNome} 
+        value={inputNome}
+        onKeyDown={handleKeyDown}
         onChange={(e) => setInputNome(e.target.value)}
       />
       <button id="botao-buscar" onClick={handleBuscar} >Buscar</button>
