@@ -10,7 +10,7 @@ function App() {
   return (
     <FavoritosProvider>
       <div className="app-container">
-        <h1>Pokedex do Dandan</h1>
+        <h1>Pokedex</h1>
         
         <button onClick={() => setMostrarFavoritos(!mostrarFavoritos)}>
           {mostrarFavoritos ? 'Ocultar Favoritos' : 'Ver Favoritos'}

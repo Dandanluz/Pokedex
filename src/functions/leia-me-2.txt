@@ -1,0 +1,29 @@
+o que é http?
+como funciona dns?
+como fazer requisicoes fetch com javascript puro?
+o que é api?
+
+
+consumir api "https://pokeapi.co/"
+
+montar uma interface simples para buscar pokemons e mostrar os resultados.
+
+ideal do resultado:
+
+ser um componente de card, que tem a imagem do pokemon, e informações principais.
+e se clicar no pokemon ele abre mais informações importante sobre ele.
+
+
+
+
+Objetivos:
+
+1 Ter uma pokedex funcional
+2 Ter um minigame de reflexo para capturar pokemons (quanto mais raro mais dificil)
+3 Deixar a página bonita, moderna e com uma interface suave e amigável
+
+
+3 => melhorar design da página de acordo com -> https://dribbble.com/shots/15128634-Pokemon-Pokedex-Website-Redesign-Concept
+3. Mudar a disposição dos elementos, cards, criar componentes, adicionar mais cores, mudar fontes, deixar mais suave e com uma boa UX
+2. Se inspirar nos jogos de reflexo e fazer com que o pokemon apareça em um x intervalo e o player deve acertar para capturar
+1. (antes de ter o minigame) Conseguir favoritar os pokemons e deixar salvo via localstorage
