@@ -15,7 +15,7 @@ function Detalhes({ id }) {
         return <p>Loading...</p>;
     }
 
-    const pokemon = pokemonData.find((pokemon) => pokemon.id === id);
+    const pokemon = pokemonData.find((pokemon) => pokemon.id === Number(id));
     const ehFavorito = favoritos.some((fav) => fav.id === pokemon.id);
 
     function renderizarAltura(altura){

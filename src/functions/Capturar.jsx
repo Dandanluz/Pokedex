@@ -1,12 +1,13 @@
 import { useState, useEffect, useContext } from 'react';
-import { FavoritosContext } from './FavoritosContext'; 
+import { FavoritosContext } from './FavoritosContext';
 
 function Capturar({ pokemon, onConcluido }) {
     const { alternarFavorito } = useContext(FavoritosContext); 
     const [corDoBotao, setCorDoBotao] = useState('red');
     const [milissegundos, setMilissegundos] = useState(0);
     const [tentativasSucesso, setTentativasSucesso] = useState(0); 
-    const [mensagem, setMensagem] = useState('Espera ficar verde e clica em menos de 1s!');
+    const [mensagem, setMensagem] = useState('Espera ficar verde e clique rapido!');
+    const [captureRate, setCaptureRate] = useState(null);
 
     useEffect(() => {
         if (corDoBotao === 'red') {
@@ -32,13 +33,34 @@ function Capturar({ pokemon, onConcluido }) {
         };
     }, [corDoBotao]);
 
+    useEffect(() => {
+        async function fetchSpecies() {
+            if(!pokemon || !pokemon.id) return;
+            try {
+                const res = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon.id}`);
+                const data = await res.json();
+
+                setCaptureRate(data.capture_rate);
+            } catch (err) {
+                console.error("Erro ao buscar taxa de captura", err);
+            }
+        }
+        fetchSpecies();
+    }, [pokemon]);
+
     const tentarCapturar = () => {
         if (corDoBotao === 'red') {
             setMensagem('Muito cedo! O botão ainda estava vermelho.');
             return;
         }
 
-        if (milissegundos < 1000) {
+        let tempoLimite = 1000;
+        if (captureRate !== null) {
+            if (captureRate < 45) tempoLimite = 500;       
+            else if (captureRate > 150) tempoLimite = 1500;
+        }
+
+        if (milissegundos < tempoLimite) {
             const proximoSucesso = tentativasSucesso + 1;
             setTentativasSucesso(proximoSucesso);
 
@@ -51,7 +73,7 @@ function Capturar({ pokemon, onConcluido }) {
                 reiniciarRodada();
             }
         } else {
-            setMensagem('Muito lento (> 1s)! As tentativas foram resetadas.');
+            setMensagem(`Muito lento (> ${tempoLimite}ms)! As tentativas foram resetadas.`);
             setTentativasSucesso(0); 
             reiniciarRodada();
         }
@@ -66,6 +88,7 @@ function Capturar({ pokemon, onConcluido }) {
         <div className='Captura'>
             <h3>Minijogo de Captura: {pokemon.name}</h3>
             <p>Progresso: <strong>{tentativasSucesso} / 5</strong></p>
+            <p>Taxa de captura: {captureRate !== null ? captureRate : 'Carregando...'}</p>
             <p>{mensagem}</p>
             <h3>Tempo: {milissegundos}ms</h3>
             
