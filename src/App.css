@@ -76,3 +76,11 @@
     background-color: #fff;
     margin: 20px;
 }
+
+.Captura{
+    background: #222;
+    color: #fff; 
+    padding: 20px;
+    border-radius: 8px;
+    font-size: 15px;
+}

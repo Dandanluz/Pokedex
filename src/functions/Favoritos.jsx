@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { FavoritosContext } from './FavoritosContext';
 
 function Favoritos() {
@@ -11,14 +11,20 @@ function Favoritos() {
     return (
         <div className="favoritos-section">
             <h2>Pokémons Favoritados ({favoritos.length})</h2>
+
+            
+
             <div className="posts-container">
                 {favoritos.map((pokemon) => (
                     <div key={pokemon.id} className="pokemon-card">
                         <h3>{pokemon.name}</h3>
                         <img src={pokemon.img} alt={pokemon.name} />
+                        
                         <button onClick={() => alternarFavorito(pokemon)}>
-                            Remover
+                            Remover dos favoritos
                         </button>
+
+                        
                     </div>
                 ))}
             </div>

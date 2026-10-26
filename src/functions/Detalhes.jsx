@@ -1,11 +1,15 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { FavoritosContext } from './FavoritosContext';
 import ReadCards from "./ReadCards";
+import Capturar from './Capturar';
+
 
 function Detalhes({ id }) {
     const { pokemonData, loading } = ReadCards();
     
     const { favoritos, alternarFavorito } = useContext(FavoritosContext);
+    const [pokemonAtivoMinigame, setPokemonAtivoMinigame] = useState(null);
+    
 
     if (loading) {
         return <p>Loading...</p>;
@@ -31,19 +35,26 @@ function Detalhes({ id }) {
     }
     
     return(
-        <div>
-            <button 
-                className="favoritar" 
-                onClick={() => alternarFavorito(pokemon)}
-            >
-                {ehFavorito ? 'Remover dos Favoritos' : 'Favoritar'}
-            </button>
-            
-            <h2>{pokemon.name}</h2>
-            <img src={pokemon.img} alt={pokemon.name}/>
-            <p>Tipo: {pokemon.types.map((typeInfo) => typeInfo.type.name).join(', ')}</p>
-            <p>Altura: {renderizarAltura(pokemon.height)}</p>
-            <p>Peso: {renderizarPeso(pokemon.weight)}</p>
+                <div>
+                    {pokemonAtivoMinigame && (
+                    <div className="modal-minigame">
+                        <Capturar
+                            pokemon={pokemonAtivoMinigame}
+                            onConcluido={() => setPokemonAtivoMinigame(null)}
+                        />
+                        <button onClick={() => setPokemonAtivoMinigame(null)}>Cancelar</button>
+                    </div>
+                    )}
+                <div>
+                <button onClick={() => setPokemonAtivoMinigame(pokemon)}>
+                    Jogar para Capturar
+                </button>
+                <h2>{pokemon.name}</h2>
+                <img src={pokemon.img} alt={pokemon.name}/>
+                <p>Tipo: {pokemon.types.map((typeInfo) => typeInfo.type.name).join(', ')}</p>
+                <p>Altura: {renderizarAltura(pokemon.height)}</p>
+                <p>Peso: {renderizarPeso(pokemon.weight)}</p>
+            </div>
         </div>
     );
 }
