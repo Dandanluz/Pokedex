@@ -13,6 +13,26 @@ function Cards() {
   const [filtroAlturaMin, setFiltroAlturaMin] = useState('');
   const [filtroAlturaMax, setFiltroAlturaMax] = useState('');
 
+  const coresTipos = {
+    fire: '#F08030',
+    water: '#6890F0',
+    grass: '#78C850',
+    electric: '#F8D030',
+    ice: '#98D8D8',
+    fighting: '#C03028',
+    poison: '#A040A0',
+    ground: '#E0C068',
+    flying: '#A890F0',
+    psychic: '#F85888',
+    bug: '#A8B820',
+    rock: '#B8A038',
+    ghost: '#705898',
+    dragon: '#7038F8',
+    steel: '#B8B8D0',
+    fairy: '#EE99AC',
+    normal: '#A8A878',
+  };
+
   const handleBuscar = () => {
     setTermoBusca(inputNome);
     setSelectedPokemonId(null);
@@ -130,9 +150,31 @@ function Cards() {
                 onClick={() => handleSelectCard(pokemon.id)}
                 className='pokemon-card'
               >
-                <h2>{pokemon.name}</h2>
                 <img src={pokemon.img} alt={pokemon.name} />
-                <p>{pokemon.types?.map((t) => t.type.name).join(', ')}</p>
+                <p>ID: {pokemon.id}</p>
+                <h2>{pokemon.name}</h2>
+                <div className="pokemon-types">
+                  {pokemon.types?.map((t) => {
+                    const nomeTipo = t.type.name;
+                    return (
+                      <span
+                        key={nomeTipo}
+                        style={{
+                          backgroundColor: coresTipos[nomeTipo] || '#777',
+                          color: 'black',
+                          padding: '4px 8px',
+                          borderRadius: '4px',
+                          marginRight: '4px',
+                          fontSize: '0.85rem',
+                          textTransform: 'capitalize',
+                          fontWeight: 'bold'
+                        }}
+                      >
+                        {nomeTipo}
+                      </span>
+                    );
+                  })}
+                </div>
               </div>
             ))
           ) : (
