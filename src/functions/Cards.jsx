@@ -87,21 +87,23 @@ function Cards() {
   });
   
   return (
-    <div className='barra-pesquisa'>
-      <input 
-        id="busca" 
-        type="text" 
-        placeholder="Nome do Pokémon" 
-        value={inputNome}
-        onKeyDown={handleKeyDown}
-        onChange={(e) => setInputNome(e.target.value)}
-      />
-      <button id="botao-buscar" onClick={handleBuscar} >Buscar</button>
+    <div>
+      <div className='search-wrapper'>
+        <input
+          id="busca"
+          type="text"
+          placeholder="Nome do Pokémon"
+          value={inputNome}
+          onKeyDown={handleKeyDown}
+          onChange={(e) => setInputNome(e.target.value)}
+        />
+        <button id="botao-buscar" onClick={handleBuscar}>Buscar</button>
+      </div>
 
       <div>
             <ul className="filtros">
                 <li>
-                    <select value={filtroTipo} onChange={(e) => setFiltroTipo(e.target.value)}>
+                    <select className='tipos' value={filtroTipo} onChange={(e) => setFiltroTipo(e.target.value)}>
                       <option value="">Todos os Tipos</option>
                       <option value="fire">Fogo</option>
                       <option value="water">Água</option>
@@ -123,7 +125,7 @@ function Cards() {
                     </select>
                 </li>
                <li>
-                    <select value={filtroAlturaMin} onChange={(e) => setFiltroAlturaMin(e.target.value)}>
+                    <select className='AlturaMin' value={filtroAlturaMin} onChange={(e) => setFiltroAlturaMin(e.target.value)}>
                       <option value="Sem Mínimo">Altura min.</option>
                       <option value="50 cm">50 cm</option>
                       <option value="1 m">1 m</option>
@@ -131,7 +133,7 @@ function Cards() {
                     </select>
                </li>
                <li>
-                    <select value={filtroAlturaMax} onChange={(e) => setFiltroAlturaMax(e.target.value)}>
+                    <select className='AlturaMax' value={filtroAlturaMax} onChange={(e) => setFiltroAlturaMax(e.target.value)}>
                       <option value="Sem Máximo">Altura max.</option>
                       <option value="50 cm">50 cm</option>
                       <option value="1 m">1 m</option>
@@ -140,7 +142,6 @@ function Cards() {
                </li>
             </ul>
       </div>
-      
       <div className='container'>
         <div className='posts-container'>
           {pokemonsFiltrados.length > 0 ? (
@@ -182,6 +183,7 @@ function Cards() {
           )}
         </div>
 
+        {/* O painel de detalhes fica aqui dentro, esticando na lateral */}
         <aside className='detalhes'>
           {termoBusca ? (
             <Pesquisa nome={termoBusca} />

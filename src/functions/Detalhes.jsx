@@ -3,7 +3,6 @@ import { FavoritosContext } from './FavoritosContext';
 import ReadCards from "./ReadCards";
 import Capturar from './Capturar';
 
-
 function Detalhes({ id }) {
     const { pokemonData, loading } = ReadCards();
     
@@ -20,40 +19,41 @@ function Detalhes({ id }) {
 
     function renderizarAltura(altura){
         if(altura < 10){
-            const cm = altura * 10;
-            return <p>{cm} cm</p>
+            return `${altura * 10} cm`;
         }
         else{
-            const m = altura / 10;
-            return <p>{m} m</p>
+            return `${altura / 10} m`;
         }
     }
     
     function renderizarPeso(peso){
-        const kg = peso / 10;
-        return <p>{kg} kg</p>;
+        return `${peso / 10} kg`;
     }
     
     return(
-                <div>
-                    {pokemonAtivoMinigame && (
-                    <div className="modal-minigame">
-                        <Capturar
-                            pokemon={pokemonAtivoMinigame}
-                            onConcluido={() => setPokemonAtivoMinigame(null)}
-                        />
-                        <button onClick={() => setPokemonAtivoMinigame(null)}>Cancelar</button>
-                    </div>
-                    )}
-                <div>
+        <div>            
+            {pokemonAtivoMinigame && (
+                <div className="modal-minigame">
+                    <Capturar
+                        pokemon={pokemonAtivoMinigame}
+                        onConcluido={() => setPokemonAtivoMinigame(null)}
+                    />
+                    <button onClick={() => setPokemonAtivoMinigame(null)}>Cancelar</button>
+                </div>
+            )}
+
+            <div>
+                <img src={pokemon.img} alt={pokemon.name}/>
+                <div className='infos'>
+                    <h2>{pokemon.name}</h2>
+                    <p style={{fontSize: '12px', margin: '15px' , marginTop: '-15px'}}>ID: {pokemon.id}</p>
+                    <p>Tipo: {pokemon.types.map((typeInfo) => typeInfo.type.name).join(', ')}</p>
+                    <p>Altura: {renderizarAltura(pokemon.height)}</p>
+                    <p>Peso: {renderizarPeso(pokemon.weight)}</p>
+                </div>
                 <button onClick={() => setPokemonAtivoMinigame(pokemon)}>
                     Jogar para Capturar
                 </button>
-                <h2>{pokemon.name}</h2>
-                <img src={pokemon.img} alt={pokemon.name}/>
-                <p>Tipo: {pokemon.types.map((typeInfo) => typeInfo.type.name).join(', ')}</p>
-                <p>Altura: {renderizarAltura(pokemon.height)}</p>
-                <p>Peso: {renderizarPeso(pokemon.weight)}</p>
             </div>
         </div>
     );

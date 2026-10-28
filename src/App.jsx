@@ -12,7 +12,7 @@ function App() {
       <div className="app-container">
         <h1>Pokedex</h1>
         
-        <button onClick={() => setMostrarFavoritos(!mostrarFavoritos)}>
+        <button className='MostrarFav' onClick={() => setMostrarFavoritos(!mostrarFavoritos)}>
           {mostrarFavoritos ? 'Ocultar Favoritos' : 'Ver Favoritos'}
         </button>
 
