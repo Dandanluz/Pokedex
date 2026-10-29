@@ -2,12 +2,33 @@ import { useContext, useState } from 'react';
 import { FavoritosContext } from './FavoritosContext';
 import ReadCards from "./ReadCards";
 import Capturar from './Capturar';
+import pokebola from './pokebola.png'
 
 function Detalhes({ id }) {
     const { pokemonData, loading } = ReadCards();
     
     const { favoritos, alternarFavorito } = useContext(FavoritosContext);
     const [pokemonAtivoMinigame, setPokemonAtivoMinigame] = useState(null);
+
+    const coresTipos = {
+    fire: '#F08030',
+    water: '#6890F0',
+    grass: '#78C850',
+    electric: '#F8D030',
+    ice: '#98D8D8',
+    fighting: '#C03028',
+    poison: '#A040A0',
+    ground: '#E0C068',
+    flying: '#A890F0',
+    psychic: '#F85888',
+    bug: '#A8B820',
+    rock: '#B8A038',
+    ghost: '#705898',
+    dragon: '#7038F8',
+    steel: '#B8B8D0',
+    fairy: '#EE99AC',
+    normal: '#A8A878',
+  };
     
 
     if (loading) {
@@ -43,16 +64,38 @@ function Detalhes({ id }) {
             )}
 
             <div>
-                <img src={pokemon.img} alt={pokemon.name}/>
+                <img className="fav-img" src={pokemon.img} alt={pokemon.name}/>
                 <div className='infos'>
+                    <p style={{fontSize: '12px', marginTop: '10px', }}>ID: {pokemon.id}</p>
                     <h2>{pokemon.name}</h2>
-                    <p style={{fontSize: '12px', margin: '15px' , marginTop: '-15px'}}>ID: {pokemon.id}</p>
-                    <p>Tipo: {pokemon.types.map((typeInfo) => typeInfo.type.name).join(', ')}</p>
+                    <div className="fav-types">
+                    {pokemon.types?.map((t) => {
+                        const nomeTipo = t.type.name;
+                        return (
+                        <span
+                            key={nomeTipo}
+                            style={{
+                            backgroundColor: coresTipos[nomeTipo] || '#777',
+                            color: 'black',
+                            padding: '4px 8px',
+                            borderRadius: '4px',
+                            marginRight: '4px',
+                            fontSize: '0.85rem',
+                            textTransform: 'capitalize',
+                            fontWeight: 'bold'
+                            }}
+                        >
+                            {nomeTipo}
+                        </span>
+                        );
+                    })}
+                    </div>
+                    <br></br>
                     <p>Altura: {renderizarAltura(pokemon.height)}</p>
                     <p>Peso: {renderizarPeso(pokemon.weight)}</p>
                 </div>
-                <button onClick={() => setPokemonAtivoMinigame(pokemon)}>
-                    Jogar para Capturar
+                <button className="pokebola" onClick={() => setPokemonAtivoMinigame(pokemon)}>
+                    <img src={pokebola} alt="Botão pokebola" width={70} height={70}/>
                 </button>
             </div>
         </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import ReadCards from './ReadCards';
 import Detalhes from './Detalhes';
 import Pesquisa from './Pesquisa';
@@ -12,6 +12,7 @@ function Cards() {
   const [filtroTipo, setFiltroTipo] = useState('');
   const [filtroAlturaMin, setFiltroAlturaMin] = useState('');
   const [filtroAlturaMax, setFiltroAlturaMax] = useState('');
+  const detalhesRef = useRef(null);
 
   const coresTipos = {
     fire: '#F08030',
@@ -41,6 +42,10 @@ function Cards() {
   const handleSelectCard = (id) => {
     setSelectedPokemonId(id);
     setTermoBusca('');
+    window.scrollTo({
+      top: 100,
+      behavior: 'smooth'
+    });
   };
 
   const handleKeyDown = (event) => {
@@ -183,8 +188,7 @@ function Cards() {
           )}
         </div>
 
-        {/* O painel de detalhes fica aqui dentro, esticando na lateral */}
-        <aside className='detalhes'>
+        <aside className='detalhes' ref={detalhesRef}>
           {termoBusca ? (
             <Pesquisa nome={termoBusca} />
           ) : selectedPokemonId ? (

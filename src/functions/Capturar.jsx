@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { FavoritosContext } from './FavoritosContext';
+import pokebola from './pokebola.png'
 
 function Capturar({ pokemon, onConcluido }) {
     const { alternarFavorito } = useContext(FavoritosContext); 
@@ -12,7 +13,7 @@ function Capturar({ pokemon, onConcluido }) {
     useEffect(() => {
         if (corDoBotao === 'red') {
             const timer = setTimeout(() => {
-                setCorDoBotao('green');
+                setCorDoBotao('white');
             }, 5000);
 
             return () => clearTimeout(timer);
@@ -22,7 +23,7 @@ function Capturar({ pokemon, onConcluido }) {
     useEffect(() => {
         let interval = null;
         
-        if (corDoBotao === 'green') {
+        if (corDoBotao === 'white') {
             interval = setInterval(() => {
                 setMilissegundos((prev) => prev + 10);
             }, 10);
@@ -93,10 +94,11 @@ function Capturar({ pokemon, onConcluido }) {
             <h3>Tempo: {milissegundos}ms</h3>
             
             <button 
+
                 onClick={tentarCapturar}
                 style={{ backgroundColor: corDoBotao, color: 'white', padding: '10px 20px', border: 'none', cursor: 'pointer' }}
             >
-                {corDoBotao === 'red' ? 'Esperando...' : 'CLIQUE JÁ!'}
+                {corDoBotao === 'red' ? 'Esperando...' : <img src={pokebola} alt="Botão pokebola" width={70} height={70}/>}
             </button>
         </div>
     );
