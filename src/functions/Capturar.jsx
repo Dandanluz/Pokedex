@@ -7,7 +7,7 @@ function Capturar({ pokemon, onConcluido }) {
     const [corDoBotao, setCorDoBotao] = useState('red');
     const [milissegundos, setMilissegundos] = useState(0);
     const [tentativasSucesso, setTentativasSucesso] = useState(0); 
-    const [mensagem, setMensagem] = useState('Espera ficar verde e clique rapido!');
+    const [mensagem, setMensagem] = useState('Espera o pokemon aparecer e clique na pokebola!');
     const [captureRate, setCaptureRate] = useState(null);
 
     useEffect(() => {
@@ -51,7 +51,7 @@ function Capturar({ pokemon, onConcluido }) {
 
     const tentarCapturar = () => {
         if (corDoBotao === 'red') {
-            setMensagem('Muito cedo! O botão ainda estava vermelho.');
+            setMensagem('Muito cedo! O POkemon ainda não apareceu.');
             return;
         }
 
@@ -91,6 +91,7 @@ function Capturar({ pokemon, onConcluido }) {
             <p>Progresso: <strong>{tentativasSucesso} / 5</strong></p>
             <p>Taxa de captura: {captureRate !== null ? captureRate : 'Carregando...'}</p>
             <p>{mensagem}</p>
+            <p>{corDoBotao === 'white' ? <img src={pokemon.img} alt={pokemon.name} width={150} height={150} /> : '...'}</p>
             <h3>Tempo: {milissegundos}ms</h3>
             
             <button 
